@@ -17,25 +17,29 @@ import random
 
 class ActionParseUserText(Action):
     
-    def name(self):
+    def name(self) -> Text:
         return "action_parse_user_text"
 
-    def run(self, dispatcher, tracker, domain):
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
         # df = pd.DataFrame({'user_text': [user_text], 'intent': [intent]})
 
-        dispatcher.utter_message('mes_inte: ' + str(intent) + '\n')
+        dispatcher.utter_message('mes_inte: ' + str(intent))
 
         return []
 
 
 class ActionCannabisInfo(Action):
-    def name(self):
+    def name(self) -> Text:
         return "action_cannabis_info"
 
-    def run(self, dispatcher, tracker, domain):
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
@@ -72,10 +76,12 @@ class ActionCannabisInfo(Action):
 
 
 class ActionTechSupport(Action):
-    def name(self):
+    def name(self) -> Text:
         return "action_tech_support"
 
-    def run(self, dispatcher, tracker, domain):
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')

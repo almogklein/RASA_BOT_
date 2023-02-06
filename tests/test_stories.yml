@@ -89,3 +89,17 @@ stories:
       are you a bot?
     intent: bot_challenge
   - action: utter_iamabot
+
+- story: canabis info
+  steps:
+  - user: |
+      what are the different strains of cannabis?
+    intent: ask_cannabis_info
+  - action: action_cannabis_info
+
+- story: canabis tech support
+  steps:
+  - user: |
+      What humidity level is best for my cannabis plants?
+    intent: action_tech_support
+  - action: action_tech_support

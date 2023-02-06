@@ -1,0 +1,74 @@
+[
+  {
+    "text": "what type of light should i use for my cannabis plants?",
+    "intent": "ask_tech_support",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.7860081195831299
+    }
+  },
+  {
+    "text": "how often should i feed my cannabis plants?",
+    "intent": "ask_tech_support",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.6827491521835327
+    }
+  },
+  {
+    "text": "what humidity level is best for my cannabis plants?",
+    "intent": "ask_tech_support",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.7228414416313171
+    }
+  },
+  {
+    "text": "wha is weed?",
+    "intent": "ask_tech_support",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.9049981832504272
+    }
+  },
+  {
+    "text": "what are the different strains of cannabis?",
+    "intent": "ask_cannabis_info",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.6864812970161438
+    }
+  },
+  {
+    "text": "what are the effects of different cannabis strains?",
+    "intent": "ask_cannabis_info",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.6283557415008545
+    }
+  },
+  {
+    "text": "what are the benefits of using cannabis?",
+    "intent": "ask_cannabis_info",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.8267871737480164
+    }
+  },
+  {
+    "text": "what are the best methods of consuming cannabis?\"",
+    "intent": "ask_cannabis_info",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.8290296792984009
+    }
+  },
+  {
+    "text": "is cannabis legal?",
+    "intent": "ask_cannabis_info",
+    "intent_prediction": {
+      "name": "bot_name",
+      "confidence": 0.8807899355888367
+    }
+  }
+]
