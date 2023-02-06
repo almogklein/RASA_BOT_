@@ -95,3 +95,19 @@ nlu:
     - what is your name?
     - what are you called?
     - how may i address you?
+
+- intent: ask_tech_support
+  examples: |
+    - what type of light should i use for my cannabis plants?
+    - how often should i feed my cannabis plants?
+    - what humidity level is best for my cannabis plants?
+    - wha is weed?
+
+    
+- intent: ask_cannabis_info
+  examples: |
+    - What are the different strains of cannabis?
+    - What are the effects of different cannabis strains?
+    - What are the benefits of using cannabis?
+    - Is cannabis legal?
+    - What are the best methods of consuming cannabis?"
