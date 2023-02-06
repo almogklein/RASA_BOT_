@@ -39,34 +39,34 @@ stories:
   - action: utter_bot_name
   - action: utter_end_of_story_bad
 
-- story: technical support good path
-  steps:
-  - intent: ask_tech_support
-  # - action: action_parse_user_text
-  - action: action_tech_support
-  - intent: affirm
-  - action: utter_end_of_story_good
+# - story: technical support good path
+#   steps:
+#   - intent: ask_tech_support
+#   # - action: action_parse_user_text
+#   - action: action_tech_support
+#   - intent: affirm
+#   - action: utter_end_of_story_good
 
-- story: technical support bad path
-  steps:
-  - intent: ask_tech_support
-  # - action: action_parse_user_text
-  - action: action_tech_support
-  - intent: deny
-  - action: utter_end_of_story_bad
+# - story: technical support bad path
+#   steps:
+#   - intent: ask_tech_support
+#   # - action: action_parse_user_text
+#   - action: action_tech_support
+#   - intent: deny
+#   - action: utter_end_of_story_bad
 
-- story: info good path
-  steps:
-  - intent: ask_cannabis_info
-  # - action: action_parse_user_text
-  - action: action_cannabis_info
-  - intent: affirm
-  - action: utter_end_of_story_good
+# - story: info good path
+#   steps:
+#   - intent: ask_cannabis_info
+#   # - action: action_parse_user_text
+#   - action: action_cannabis_info
+#   - intent: affirm
+#   - action: utter_end_of_story_good
 
-- story: info bad path
-  steps:
-  - intent: ask_cannabis_info
-  # - action: action_parse_user_text
-  - action: action_cannabis_info
-  - intent: deny
-  - action: utter_end_of_story_bad
+# - story: info bad path
+#   steps:
+#   - intent: ask_cannabis_info
+#   # - action: action_parse_user_text
+#   - action: action_cannabis_info
+#   - intent: deny
+#   - action: utter_end_of_story_bad
