@@ -9,7 +9,8 @@ intents:
   - mood_unhappy
   - bot_challenge
   - bot_name
-
+  - ask_tech_support
+  - ask_cannabis_info
 
 responses:
   utter_greet:
@@ -33,6 +34,19 @@ responses:
   
   utter_bot_name:
   - text: "Enthiran 3.0"
+
+  utter_end_of_story_good:
+  - text: "happy to serve you :)"
+
+  utter_end_of_story_bad:
+  - text: "Im sorry. thers someting else i may try to help?"
+
+actions:
+- action_parse_user_text
+- action_cannabis_info
+- action_tech_support
+- utter_end_of_story_good
+- utter_end_of_story_bad
 
 session_config:
   session_expiration_time: 60

@@ -92,7 +92,7 @@ nlu:
 
 - intent: bot_name
   examples: |
-    - what is your name?
+    - what is your name?what 
     - what are you called?
     - how may i address you?
 
@@ -106,8 +106,8 @@ nlu:
     
 - intent: ask_cannabis_info
   examples: |
-    - What are the different strains of cannabis?
-    - What are the effects of different cannabis strains?
-    - What are the benefits of using cannabis?
-    - Is cannabis legal?
-    - What are the best methods of consuming cannabis?"
+    - what are the different strains of cannabis?
+    - what are the effects of different cannabis strains?
+    - what are the benefits of using cannabis?
+    - what are the best methods of consuming cannabis?"
+    - is cannabis legal?

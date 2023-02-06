@@ -5,6 +5,7 @@ stories:
 - story: happy path
   steps:
   - intent: greet
+  - action: ActionParseUserText
   - action: utter_greet
   - intent: mood_great
   - action: utter_end_of_story_good
@@ -12,6 +13,7 @@ stories:
 - story: sad path 1
   steps:
   - intent: greet
+  - action: ActionParseUserText
   - action: utter_greet
   - intent: mood_unhappy
   - action: utter_cheer_up
@@ -22,6 +24,7 @@ stories:
 - story: sad path 2
   steps:
   - intent: greet
+  - action: ActionParseUserText
   - action: utter_greet
   - intent: mood_unhappy
   - action: utter_cheer_up
@@ -32,10 +35,11 @@ stories:
 - story: path 4
   steps:
   - intent: bot_name
+  - action: ActionParseUserText
   - action: utter_bot_name
   - action: utter_end_of_story_bad
 
-- story: Asking for Technical Support good
+- story: technical support good path
   steps:
   - intent: ask_tech_support
   - action: ActionParseUserText
@@ -43,7 +47,7 @@ stories:
   - intent: affirm
   - action: utter_end_of_story_good
 
-- story: Asking for Technical Support bad
+- story: technical support bad path
   steps:
   - intent: ask_tech_support
   - action: ActionParseUserText
@@ -51,7 +55,7 @@ stories:
   - intent: deny
   - action: utter_end_of_story_bad
 
-- story: Asking for info good
+- story: info good path
   steps:
   - intent: ask_cannabis_info
   - action: ActionParseUserText
@@ -59,7 +63,7 @@ stories:
   - intent: affirm
   - action: utter_end_of_story_good
 
-- story: Asking for info bad
+- story: info bad path
   steps:
   - intent: ask_cannabis_info
   - action: ActionParseUserText

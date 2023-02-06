@@ -8,56 +8,41 @@
 # This is a simple example for a custom action which utters "Hello World!"
 
 from typing import Any, Text, Dict, List
-from rasa_sdk import Action, Tracker
+from rasa_sdk import Action, Tracker 
 from rasa_sdk.executor import CollectingDispatcher
-from oauth2client.service_account import ServiceAccountCredentials
+# from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
-import gspread
+# import gspread
 import random
-
-# class ActionHelloWorld(Action):
-
-#     def name(self) -> Text:
-#         return "action_hello_world"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-#         dispatcher.utter_message(text="Hello World!")
-
-#         return []
 
 class ActionParseUserText(Action):
     
-    def name(self) -> Text:
+    def name(self):
         return "action_parse_user_text"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher, tracker, domain):
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
-        df = pd.DataFrame({'user_text': [user_text], 'intent': [intent]})
+        # df = pd.DataFrame({'user_text': [user_text], 'intent': [intent]})
+
+        dispatcher.utter_message('mes_inte: ' + str(intent) + '\n')
 
         return []
 
 
 class ActionCannabisInfo(Action):
-    def name(self) -> Text:
+    def name(self):
         return "action_cannabis_info"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher, tracker, domain):
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
         if intent == "ask_cannabis_info":
-            dispatcher.utter_message(text="Cannabis is a plant that is used for medicinal and recreational purposes. The most commonly used part of the plant is the flowers or buds, which contain the psychoactive compounds delta-9-tetrahydrocannabinol (THC) and cannabidiol (CBD). THC is responsible for the “high” associated with cannabis use.")
+            dispatcher.utter_message("Cannabis is a plant that is used for medicinal and recreational purposes. The most commonly used part of the plant is the flowers or buds, which contain the psychoactive compounds delta-9-tetrahydrocannabinol (THC) and cannabidiol (CBD). THC is responsible for the “high” associated with cannabis use.")
         else:
-            dispatcher.utter_message(text="I'm sorry, I do not have information on that.")
+            dispatcher.utter_message("I'm sorry, I do not have information on that.")
 
         return []
     
@@ -87,17 +72,15 @@ class ActionCannabisInfo(Action):
 
 
 class ActionTechSupport(Action):
-    def name(self) -> Text:
+    def name(self):
         return "action_tech_support"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher, tracker, domain):
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
         if intent == "ask_tech_support":
-            dispatcher.utter_message(text="Our technical support team is available 24/7 to assist you with any issues you may be having. Please send an email to support@cannabischatbot.com with a detailed description of your problem and we will get back to you as soon as possible.")
+            dispatcher.utter_message(text="Our technical support team is available 24/7 to assist you with any issues you may be having.")  #. Please send an email to support@cannabischatbot.com with a detailed description of your problem and we will get back to you as soon as possible.")
         else:
             dispatcher.utter_message(text="I'm sorry, I do not have information on that.")
 
