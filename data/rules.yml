@@ -14,7 +14,17 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
-- rule: Say 'My bot name is, ' anytime the user challenges
+- rule: Say 'My bot name is ' anytime the user challenges
   steps:
   - intent: bot_name
   - action: utter_bot_name
+
+- rule: technical support
+  steps:
+  - intent: ask_tech_support
+  - action: action_tech_support
+
+- rule: info support
+  steps:
+  - intent: ask_cannabis_info
+  - action: action_cannabis_info

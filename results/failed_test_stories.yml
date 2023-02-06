@@ -1,1 +1,10 @@
-# None of the test stories failed - all good!
+version: "3.1"
+stories:
+- story: canabis info (.\tests\test_stories.yml)
+  steps:
+  - intent: ask_cannabis_info  # predicted: bot_name: what are the different strains of cannabis?
+  - action: action_cannabis_info  # predicted: action_default_fallback
+- story: canabis tech support (.\tests\test_stories.yml)
+  steps:
+  - intent: action_tech_support  # predicted: bot_name: What humidity level is best for my cannabis plants?
+  - action: action_tech_support  # predicted: action_default_fallback

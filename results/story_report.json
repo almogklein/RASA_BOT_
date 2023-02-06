@@ -1,27 +1,15 @@
 {
-  "mood_unhappy": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 3
-  },
   "utter_goodbye": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 4
   },
-  "utter_iamabot": {
+  "action_listen": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 1
-  },
-  "utter_cheer_up": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 3
+    "support": 18
   },
   "goodbye": {
     "precision": 1.0,
@@ -29,37 +17,13 @@
     "f1-score": 1.0,
     "support": 2
   },
-  "action_listen": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 16
-  },
-  "affirm": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 1
-  },
-  "deny": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 2
-  },
-  "mood_great": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 2
-  },
-  "utter_happy": {
+  "utter_did_that_help": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 3
   },
-  "utter_did_that_help": {
+  "mood_unhappy": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
@@ -71,11 +35,41 @@
     "f1-score": 1.0,
     "support": 1
   },
-  "utter_greet": {
+  "ask_cannabis_info": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1
+  },
+  "utter_happy": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 5
+    "support": 3
+  },
+  "mood_great": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2
+  },
+  "action_cannabis_info": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1
+  },
+  "utter_cheer_up": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 3
+  },
+  "utter_iamabot": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1
   },
   "greet": {
     "precision": 1.0,
@@ -83,29 +77,53 @@
     "f1-score": 1.0,
     "support": 5
   },
-  "accuracy": 1.0,
-  "macro avg": {
+  "affirm": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 51
+    "support": 1
   },
-  "weighted avg": {
+  "action_tech_support": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2
+  },
+  "deny": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 51
+    "support": 2
+  },
+  "utter_greet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5
   },
   "micro avg": {
     "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 51
+    "recall": 0.9298245614035088,
+    "f1-score": 0.9636363636363636,
+    "support": 57
   },
+  "macro avg": {
+    "precision": 0.8235294117647058,
+    "recall": 0.8235294117647058,
+    "f1-score": 0.8235294117647058,
+    "support": 57
+  },
+  "weighted avg": {
+    "precision": 0.9298245614035088,
+    "recall": 0.9298245614035088,
+    "f1-score": 0.9298245614035088,
+    "support": 57
+  },
+  "accuracy": 0.9298245614035088,
   "conversation_accuracy": {
-    "accuracy": 1.0,
+    "accuracy": 0.7777777777777778,
     "correct": 7,
     "with_warnings": 0,
-    "total": 7
+    "total": 9
   }
 }
