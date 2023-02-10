@@ -10,9 +10,10 @@
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker 
 from rasa_sdk.executor import CollectingDispatcher
-# from oauth2client.service_account import ServiceAccountCredentials
+from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
-# import gspread
+import openai
+import gspread
 import random
 
 class ActionParseUserText(Action):
@@ -23,10 +24,20 @@ class ActionParseUserText(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+
+        openai.api_key = "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"
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
         # df = pd.DataFrame({'user_text': [user_text], 'intent': [intent]})
+        
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=f"Return an answer for the text + {intent} combination: " + user_text,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        ).choices[0].text
 
         dispatcher.utter_message('mes_inte: ' + str(intent))
 
@@ -43,6 +54,16 @@ class ActionCannabisInfo(Action):
         
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
+        openai.api_key = "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"
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt="Technical support: " + user_text,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        ).choices[0].text
+
         if intent == "ask_cannabis_info":
             dispatcher.utter_message("Cannabis is a plant that is used for medicinal and recreational purposes. The most commonly used part of the plant is the flowers or buds, which contain the psychoactive compounds delta-9-tetrahydrocannabinol (THC) and cannabidiol (CBD). THC is responsible for the “high” associated with cannabis use.")
         else:
@@ -82,14 +103,22 @@ class ActionTechSupport(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+
+        openai.api_key = "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"
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt="Technical support: " + user_text,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        ).choices[0].text
+        
         if intent == "ask_tech_support":
             dispatcher.utter_message(text="Our technical support team is available 24/7 to assist you with any issues you may be having.")  #. Please send an email to support@cannabischatbot.com with a detailed description of your problem and we will get back to you as soon as possible.")
         else:
             dispatcher.utter_message(text="I'm sorry, I do not have information on that.")
 
         return []
-
-        

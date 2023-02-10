@@ -11,6 +11,12 @@ intents:
   - bot_name
   - ask_tech_support
   - ask_cannabis_info
+  - general_QA 
+  - cannabis_legal 
+  - cannabis_usage 
+  - cannabis_product 
+  - medical_info 
+  - order_help
 
 responses:
   utter_greet:
