@@ -6,32 +6,59 @@
 
 
 # This is a simple example for a custom action which utters "Hello World!"
-
+import io
+import openai
+import random
+import requests
+import pandas as pd
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker 
 from rasa_sdk.executor import CollectingDispatcher
-from oauth2client.service_account import ServiceAccountCredentials
-import pandas as pd
-import openai
-import gspread
-import random
+
 
 class ActionParseUserText(Action):
-    
+    """Rasa action to parse user text and return a response from OpenAI API"""
+
     def name(self) -> Text:
         return "action_parse_user_text"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
 
-        openai.api_key = "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"
+        # Get the latest user text and intent
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
-        # df = pd.DataFrame({'user_text': [user_text], 'intent': [intent]})
         
+        # Dispatch the response from OpenAI to the user
+        dispatcher.utter_message(f'mes_inte {intent}: ' + str(user_text))
+        dispatcher.utter_message('Chatgpt: ' + self.get_answers_from_chatgpt(intent, user_text))
+        # dispatcher.utter_message('Google Sheets: ' + random.choice(self.get_answers_from_sheets(intent)))
+
+        return []
+
+    def get_answers_from_sheets(self, intent):
+
+        # Connect to Google Sheets
+        GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/< SHEET_URL >/export?format=csv&gid=0"
+        s = requests.get(GOOGLE_SHEET_URL).content
+        
+        proxy_df = pd.read_csv(io.StringIO(s.decode('utf-8')))
+
+        # Filter the dataframe by the intent
+        answers = proxy_df[proxy_df['Intent'] == intent]['Answer'].tolist()
+
+        return answers
+
+    def get_answers_from_chatgpt(self, intent, user_text):
+
+        # OpenAI API Key
+        openai.api_key = "API_KEY"
+
+         # Use OpenAI API to get the response for the given user text and intent
         response = openai.Completion.create(
-            engine="text-davinci-002",
+            engine="text-davinci-003",
             prompt=f"Return an answer for the text + {intent} combination: " + user_text,
             max_tokens=1024,
             n=1,
@@ -39,86 +66,4 @@ class ActionParseUserText(Action):
             temperature=0.5,
         ).choices[0].text
 
-        dispatcher.utter_message('mes_inte: ' + str(intent))
-
-        return []
-
-
-class ActionCannabisInfo(Action):
-    def name(self) -> Text:
-        return "action_cannabis_info"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        user_text = tracker.latest_message.get('text')
-        intent = tracker.latest_message.get('intent').get('name')
-        openai.api_key = "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"
-        response = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt="Technical support: " + user_text,
-            max_tokens=1024,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        ).choices[0].text
-
-        if intent == "ask_cannabis_info":
-            dispatcher.utter_message("Cannabis is a plant that is used for medicinal and recreational purposes. The most commonly used part of the plant is the flowers or buds, which contain the psychoactive compounds delta-9-tetrahydrocannabinol (THC) and cannabidiol (CBD). THC is responsible for the “high” associated with cannabis use.")
-        else:
-            dispatcher.utter_message("I'm sorry, I do not have information on that.")
-
-        return []
-    
-    # def get_answers_from_sheets(self, intent):
-    #     # Connect to Google Sheets
-    #     scope = ['https://spreadsheets.google.com/feeds',
-    #             'https://www.googleapis.com/auth/drive']
-    #     credentials = ServiceAccountCredentials.from_json_keyfile_name('path/to/credentials.json', scope)
-    #     gc = gspread.authorize(credentials)
-
-    #     # Open the sheet
-    #     sh = gc.open("Answers Sheet")
-
-    #     # Get the worksheet by name
-    #     worksheet = sh.worksheet("Answers")
-
-    #     # Get all the values from the worksheet
-    #     data = worksheet.get_all_values()
-
-    #     # Create a dataframe from the values
-    #     df = pd.DataFrame(data[1:], columns=data[0])
-
-    #     # Filter the dataframe by the intent
-    #     answers = df[df['Intent'] == intent]['Answer'].tolist()
-
-    #     return answers
-
-
-class ActionTechSupport(Action):
-    def name(self) -> Text:
-        return "action_tech_support"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        openai.api_key = "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"
-        user_text = tracker.latest_message.get('text')
-        intent = tracker.latest_message.get('intent').get('name')
-        response = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt="Technical support: " + user_text,
-            max_tokens=1024,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        ).choices[0].text
-        
-        if intent == "ask_tech_support":
-            dispatcher.utter_message(text="Our technical support team is available 24/7 to assist you with any issues you may be having.")  #. Please send an email to support@cannabischatbot.com with a detailed description of your problem and we will get back to you as soon as possible.")
-        else:
-            dispatcher.utter_message(text="I'm sorry, I do not have information on that.")
-
-        return []
+        return response

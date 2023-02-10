@@ -5,54 +5,16 @@ intents:
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - bot_name
-  - ask_tech_support
-  - ask_cannabis_info
-  - general_QA 
-  - cannabis_legal 
-  - cannabis_usage 
-  - cannabis_product 
-  - medical_info 
-  - order_help
 
 responses:
   utter_greet:
   - text: "Hey! How are you?"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
   utter_goodbye:
   - text: "Bye"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-  
-  utter_bot_name:
-  - text: "Enthiran 3.0"
-
-  utter_end_of_story_good:
-  - text: "happy to serve you :)"
-
-  utter_end_of_story_bad:
-  - text: "Im sorry. thers someting else i may try to help?"
-
 actions:
 - action_parse_user_text
-- action_cannabis_info
-- action_tech_support
-- utter_end_of_story_good
-- utter_end_of_story_bad
 
 session_config:
   session_expiration_time: 60
