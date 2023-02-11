@@ -29,13 +29,12 @@ pip install openai
 git clone https://github.com/<username>/rasa-bootstrap-chatbot.git
 cd rasa-bootstrap-chatbot
 ```
-
 Replace <SHEET_URL> and API_KEY in the code with your Google Sheets URL and OpenAI API key respectively.
 
----
+```
 rasa train
 rasa shell<OR>run
----
+```
 
 # Usage
 The chatbot can be used to generate answers to a wide range of questions by accessing data stored in Google Sheets or using the OpenAI ChatGPT API. The user can specify the source of the answer (Google Sheets or ChatGPT) and the chatbot will return the appropriate response.
