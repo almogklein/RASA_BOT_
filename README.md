@@ -25,7 +25,7 @@ conda activate myenv
 git clone https://github.com/almogklein/RASA_BOT_.git
 
 pip install -r requirements.txt
-cd rasa-bootstrap-chatbot
+cd RASA_BOT_
 ```
 Replace <SHEET_URL> and API_KEY in the code with your Google Sheets URL and OpenAI API key respectively.
 
