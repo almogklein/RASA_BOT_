@@ -22,7 +22,7 @@ A bootstrapped chatbot built using the open-source conversational AI platform, R
 conda create --name myenv
 conda activate myenv
 
-git clone https://github.com/<username>/rasa-bootstrap-chatbot.git
+git clone https://github.com/almogklein/RASA_BOT_.git
 
 pip install -r requirements.txt
 cd rasa-bootstrap-chatbot
