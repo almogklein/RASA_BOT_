@@ -20,18 +20,23 @@ Hardware Requirements
 Setup
 
 conda create --name myenv
+
 conda activate myenv
 
 pip install -U rasa
+
 pip install google-api-python-client
+
 pip install openai
 
 git clone https://github.com/<username>/rasa-bootstrap-chatbot.git
+
 cd rasa-bootstrap-chatbot
 
 Replace <SHEET_URL> and API_KEY in the code with your Google Sheets URL and OpenAI API key respectively.
 
 rasa train
+
 rasa shell<OR>run
 
 Usage
