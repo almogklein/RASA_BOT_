@@ -1,4 +1,4 @@
-# Rasa Bootstrap Chatbot
+# Rasa Bootstrap Chatbot #
 
 A bootstrapped chatbot built using the open-source conversational AI platform, Rasa. This chatbot has access to both Google Sheets and the OpenAI ChatGPT API, making it a powerful tool for generating answers to a wide range of questions.
 
