@@ -17,7 +17,9 @@ from rasa_sdk.executor import CollectingDispatcher
 
 
 class ActionParseUserText(Action):
-    """Rasa action to parse user text and return a response from OpenAI API"""
+
+    """Rasa action to parse user text and pulls a corresponding answer 
+    from google sheet & OpenAI API, based on the intent and entities."""
 
     def name(self) -> Text:
         return "action_parse_user_text"
@@ -30,25 +32,28 @@ class ActionParseUserText(Action):
         # Get the latest user text and intent
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
+        entities = tracker.latest_message.get('entities')
         
         # Dispatch the response from OpenAI to the user
         dispatcher.utter_message(f'mes_inte {intent}: ' + str(user_text))
-        dispatcher.utter_message('Chatgpt: ' + self.get_answers_from_chatgpt(intent, user_text))
-        # dispatcher.utter_message('Google Sheets: ' + random.choice(self.get_answers_from_sheets(intent)))
+        dispatcher.utter_message('Chatgpt: ' + self.get_answers_from_chatgpt(intent, user_text, entities))
+        dispatcher.utter_message('Google Sheets: ' + random.choice(self.get_answers_from_sheets(intent)))
 
         return []
 
-    def get_answers_from_sheets(self, intent):
+    def get_answers_from_sheets(self, intent, entity):
 
         # Connect to Google Sheets
         GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/< SHEET_URL >/export?format=csv&gid=0"
         s = requests.get(GOOGLE_SHEET_URL).content
         
+        # Read the contents of the URL as a CSV file and store it in a dataframe
         proxy_df = pd.read_csv(io.StringIO(s.decode('utf-8')))
 
-        # Filter the dataframe by the intent
+        # Filter the dataframe by the intent column and retrieve the answer list
         answers = proxy_df[proxy_df['Intent'] == intent]['Answer'].tolist()
 
+        # Return the answer list
         return answers
 
     def get_answers_from_chatgpt(self, intent, user_text):
@@ -56,7 +61,7 @@ class ActionParseUserText(Action):
         # OpenAI API Key
         openai.api_key = "API_KEY"
 
-         # Use OpenAI API to get the response for the given user text and intent
+        # Use OpenAI API to get the response for the given user text and intent
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=f"Return an answer for the text + {intent} combination: " + user_text,
@@ -66,4 +71,5 @@ class ActionParseUserText(Action):
             temperature=0.5,
         ).choices[0].text
 
+        # Return the response from OpenAI
         return response

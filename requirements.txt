@@ -1,0 +1,4 @@
+pandas==1.1.0
+requests==2.25.0
+openai==0.4.4
+rasa-sdk==2.4.0
