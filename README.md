@@ -24,12 +24,14 @@ conda activate myenv
 
 git clone https://github.com/almogklein/RASA_BOT_.git
 
-pip install -r requirements.txt
 cd RASA_BOT_
+pip install -r requirements.txt
+
 ```
 Replace <SHEET_URL> and API_KEY in the code with your Google Sheets URL and OpenAI API key respectively.
 
 ```
+rasa actions --actions actions
 rasa train
 rasa shell<OR>run
 ```
