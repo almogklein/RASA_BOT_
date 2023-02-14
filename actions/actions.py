@@ -100,7 +100,7 @@ class Simple_ChatGPT_Action(Action):
     def get_answers_from_chatgpt(self, intent, user_text):
 
         # OpenAI API Key
-        openai.api_key = "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"
+        openai.api_key = "API_KEY"
 
         # Use OpenAI API to get the response for the given user text and intent
         response = openai.Completion.create(
