@@ -5,16 +5,23 @@ intents:
   - goodbye
   - affirm
   - deny
+  - bot_name
+  - information_gpt
+  - information_sheet
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_goodbye:
-  - text: "Bye"
+  utter_bot_name:
+  - text: "Rasa_bot_v.0.1"
+  utter_more:
+  - text: "There is something else i can help?"
+  - text: "Something else i can help?"
 
 actions:
-- action_parse_user_text
+- utter_more
+- utter_bot_name
+- simple_chatgpt_action
+- simple_action_hello_world
+- simple_google_sheet_action 
 
 session_config:
   session_expiration_time: 60

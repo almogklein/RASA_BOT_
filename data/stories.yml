@@ -2,8 +2,26 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: simple utter bot name use
+  steps:
+  - intent: bot_name
+  - action: utter_bot_name
+  - action: utter_more
+
+- story: simple action use - 'hello_world'
   steps:
   - intent: greet
-  - action: action_parse_user_text
-  - action: utter_greet
+  - action: simple_action_hello_world
+  - action: utter_more
+
+- story: simple google sheet action use
+  steps:
+  - intent: information_sheet
+  - action: simple_google_sheet_action
+  - action: utter_more
+
+- story: simple chatgpt action use
+  steps:
+  - intent: information_gpt
+  - action: simple_chatgpt_action
+  - action: utter_more

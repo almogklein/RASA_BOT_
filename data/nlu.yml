@@ -48,3 +48,22 @@ nlu:
     - don't like that
     - no way
     - not really
+
+- intent: bot_name
+  examples: |
+    - what's your name?
+    - who are you?
+    - can you tell me your name?
+    - what should I call you?
+
+- intent: information_sheet
+  examples: |
+    - can you tell me more about technical aspects from sheets?
+    - what technical information details you can tell me from sheets?
+    - explain the technical from sheets
+
+- intent: information_gpt
+  examples: |
+    - tell me about technical aspects from GPT
+    - technical information details you can tell me from GPT
+    - explain from GPT

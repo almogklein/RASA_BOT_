@@ -16,13 +16,30 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 
-class ActionParseUserText(Action):
+class Simple_Action(Action):
 
-    """Rasa action to parse user text and pulls a corresponding answer 
+    """Parse user text and pulls a corresponding answer 
     from google sheet & OpenAI API, based on the intent and entities."""
 
     def name(self) -> Text:
-        return "action_parse_user_text"
+        return "simple_action_hello_world"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Hello World!")
+        
+        return []
+
+
+class Simple_Google_sheet_Action(Action):
+
+    """Rasa action to parse user text and pulls a corresponding answer 
+    from google sheet based on the intent and entities."""
+
+    def name(self) -> Text:
+        return "simple_google_sheet_action" 
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -35,12 +52,11 @@ class ActionParseUserText(Action):
         entities = tracker.latest_message.get('entities')
         
         # Dispatch the response from OpenAI to the user
-        dispatcher.utter_message(f'mes_inte {intent}: ' + str(user_text))
-        dispatcher.utter_message('Chatgpt: ' + self.get_answers_from_chatgpt(intent, user_text, entities))
-        dispatcher.utter_message('Google Sheets: ' + random.choice(self.get_answers_from_sheets(intent)))
+        dispatcher.utter_message(f'mes_inte:{intent}\n entities:\n {entities}')
+        dispatcher.utter_message('Google Sheets: ') # + str(self.get_answers_from_sheets(intent, entities)))
 
         return []
-
+    
     def get_answers_from_sheets(self, intent, entity):
 
         # Connect to Google Sheets
@@ -48,18 +64,43 @@ class ActionParseUserText(Action):
         s = requests.get(GOOGLE_SHEET_URL).content
         
         # Read the contents of the URL as a CSV file and store it in a dataframe
-        proxy_df = pd.read_csv(io.StringIO(s.decode('utf-8')))
-
-        # Filter the dataframe by the intent column and retrieve the answer list
+        proxy_df = pd.read_csv(io.StringIO(s.decode('utf-8')))        # Filter the dataframe by the intent column and retrieve the answer list
+        
         answers = proxy_df[proxy_df['Intent'] == intent]['Answer'].tolist()
+        answer = random.choice(answers)
 
         # Return the answer list
-        return answers
+        return answer
+
+
+class Simple_ChatGPT_Action(Action):
+
+    """Parse user text and pulls a corresponding answer 
+    From OpenAI ChatGPT API, based on the intent and entities."""
+
+    def name(self) -> Text:
+        return "simple_chatgpt_action"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+
+        # Get the latest user text and intent
+        user_text = tracker.latest_message.get('text')
+        intent = tracker.latest_message.get('intent').get('name')
+        entities = tracker.latest_message.get('entities')
+        
+        # Dispatch the response from OpenAI to the user
+        dispatcher.utter_message(f'mes_inte:{intent}\n entities:\n {entities}')
+        dispatcher.utter_message('Chatgpt: ' + self.get_answers_from_chatgpt(intent, user_text))
+
+        return []
 
     def get_answers_from_chatgpt(self, intent, user_text):
 
         # OpenAI API Key
-        openai.api_key = "API_KEY"
+        openai.api_key = "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"
 
         # Use OpenAI API to get the response for the given user text and intent
         response = openai.Completion.create(
