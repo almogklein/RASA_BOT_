@@ -7,12 +7,14 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 import io
+import os
 import openai
 import random
 import requests
 import pandas as pd
-from typing import Any, Text, Dict, List
+from dotenv import load_dotenv
 from rasa_sdk import Action, Tracker 
+from typing import Any, Text, Dict, List
 from rasa_sdk.executor import CollectingDispatcher
 
 
@@ -53,21 +55,24 @@ class Simple_Google_sheet_Action(Action):
         
         # Dispatch the response from OpenAI to the user
         dispatcher.utter_message(f'mes_inte:{intent}\n entities:\n {entities}')
-        dispatcher.utter_message('Google Sheets: ') # + str(self.get_answers_from_sheets(intent, entities)))
+        dispatcher.utter_message('Google Sheets: ' + str(self.get_answers_from_sheets(intent, entities)))
 
         return []
     
     def get_answers_from_sheets(self, intent, entity):
 
         # Connect to Google Sheets
-        GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/< SHEET_URL >/export?format=csv&gid=0"
+        load_dotenv()
+        sheet_url = os.getenv("SHEET_URL")
+
+        GOOGLE_SHEET_URL = f"https://docs.google.com/spreadsheets/d/{sheet_url}/export?format=csv&gid=0"
         s = requests.get(GOOGLE_SHEET_URL).content
         
         # Read the contents of the URL as a CSV file and store it in a dataframe
         proxy_df = pd.read_csv(io.StringIO(s.decode('utf-8')))        # Filter the dataframe by the intent column and retrieve the answer list
         
-        answers = proxy_df[proxy_df['Intent'] == intent]['Answer'].tolist()
-        answer = random.choice(answers)
+        answer = proxy_df[proxy_df['Intent'] == intent]['Answer'].tolist()
+        # answer = random.choice(answers)
 
         # Return the answer list
         return answer
@@ -100,7 +105,7 @@ class Simple_ChatGPT_Action(Action):
     def get_answers_from_chatgpt(self, intent, user_text):
 
         # OpenAI API Key
-        openai.api_key = "API_KEY"
+        openai.api_key = os.getenv("GPT_API_KEY")
 
         # Use OpenAI API to get the response for the given user text and intent
         response = openai.Completion.create(
