@@ -51,15 +51,15 @@ class Simple_Google_sheet_Action(Action):
         # Get the latest user text and intent
         user_text = tracker.latest_message.get('text')
         intent = tracker.latest_message.get('intent').get('name')
-        entities = tracker.latest_message.get('entities')
+        # entities = tracker.latest_message.get('entities')
         
         # Dispatch the response from OpenAI to the user
-        dispatcher.utter_message(f'mes_inte:{intent}\n entities:\n {entities}')
-        dispatcher.utter_message('Google Sheets: ' + str(self.get_answers_from_sheets(intent, entities)))
+        dispatcher.utter_message(f'mes_inte:{intent}\n')
+        dispatcher.utter_message('Google Sheets: ' + str(self.get_answers_from_sheets(intent)))
 
         return []
     
-    def get_answers_from_sheets(self, intent, entity):
+    def get_answers_from_sheets(self, intent):
 
         # Connect to Google Sheets
         load_dotenv()
@@ -97,7 +97,7 @@ class Simple_ChatGPT_Action(Action):
         entities = tracker.latest_message.get('entities')
         
         # Dispatch the response from OpenAI to the user
-        dispatcher.utter_message(f'mes_inte:{intent}\n entities:\n {entities}')
+        dispatcher.utter_message(f'mes_inte:{intent}\n')
         dispatcher.utter_message('Chatgpt: ' + self.get_answers_from_chatgpt(intent, user_text))
 
         return []
